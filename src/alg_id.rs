@@ -8,6 +8,19 @@ use core::ops::Deref;
 
 // See src/data/README.md.
 
+#[cfg(feature = "mtc")]
+/// AlgorithmIdentifier for `id-alg-mtcProof`.
+///
+/// This is:
+///
+/// ```text
+/// OBJECT_IDENTIFIER { 1.3.6.1.5.5.7.6.67 }
+/// ```
+///
+/// <https://www.ietf.org/archive/id/draft-ietf-plants-merkle-tree-certs-07.html#appendix-A>
+pub const MTC: AlgorithmIdentifier =
+    AlgorithmIdentifier::from_slice(&crate::mtc::oid!(1, 3, 6, 1, 5, 5, 7, 6, 67));
+
 /// AlgorithmIdentifier for `id-ml-dsa-44`.
 ///
 /// This is:
@@ -362,7 +375,7 @@ pub const ED448: AlgorithmIdentifier =
 /// ```
 ///
 /// Common values for this type are provided in this module.
-#[derive(Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct AlgorithmIdentifier(&'static [u8]);
 
 impl AlgorithmIdentifier {

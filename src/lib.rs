@@ -90,6 +90,8 @@ pub mod alg_id;
 mod base64;
 mod server_name;
 
+#[cfg(feature = "mtc")]
+pub mod mtc;
 /// Low-level PEM decoding APIs.
 ///
 /// These APIs allow decoding PEM format in an iterator, which means you
@@ -514,6 +516,9 @@ pub struct TrustAnchor<'a> {
     pub subject_public_key_info: Der<'a>,
     /// Value of DER-encoded `NameConstraints`, containing name constraints to the trust anchor, if any
     pub name_constraints: Option<Der<'a>>,
+    #[cfg(feature = "mtc")]
+    /// Optional MTC config
+    pub mtc_config: Option<mtc::MtcCa<'a>>,
 }
 
 impl TrustAnchor<'_> {
@@ -529,6 +534,8 @@ impl TrustAnchor<'_> {
                 .name_constraints
                 .as_ref()
                 .map(|nc| nc.as_ref().to_owned().into()),
+            #[cfg(feature = "mtc")]
+            mtc_config: self.mtc_config.as_ref().map(|cfg| cfg.to_owned()),
         }
     }
 }

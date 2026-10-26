@@ -2,7 +2,7 @@
 name = "rustls-pki-types"
 version = "1.15.1"
 edition = "2021"
-rust-version = "1.60"
+rust-version = "1.97"
 license = "MIT OR Apache-2.0"
 description = "Shared types for the rustls PKI ecosystem"
 documentation = "https://docs.rs/rustls-pki-types"
@@ -16,6 +16,7 @@ default = ["alloc"]
 alloc = ["dep:zeroize"]
 std = ["alloc"]
 web = ["web-time"]
+mtc = ["alloc"]
 
 [dependencies]
 zeroize = { version = "1", optional = true }
