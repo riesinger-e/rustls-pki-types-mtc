@@ -385,6 +385,11 @@ impl AlgorithmIdentifier {
     pub const fn from_slice(bytes: &'static [u8]) -> Self {
         Self(bytes)
     }
+
+    /// Exposes the octet slice representing the `AlgorithmIdentifier` in `const` contexts.
+    pub const fn as_slice(&self) -> &'static [u8] {
+        self.0
+    }
 }
 
 impl AsRef<[u8]> for AlgorithmIdentifier {
